@@ -2,8 +2,6 @@ import { user } from "@/util/db";
 import { NextResponse } from "next/server";
 
 export function GET(request, content) {
-  //   console.log(content.params.id);
-
   const userData = user.filter((item) => item.id == content.params.id);
 
   return NextResponse.json(
@@ -27,6 +25,32 @@ export async function PUT(request, content) {
       },
       { status: 400 }
     );
+  } else {
+    return NextResponse.json(
+      { result: payload, success: true },
+      { status: 200 }
+    );
   }
-  return NextResponse.json({ result: payload, success: true }, { status: 200 });
+}
+
+export async function DELETE(request, content) {
+  const id = content.params.id;
+
+  if (id) {
+    return NextResponse.json(
+      {
+        result: "User deleted",
+        success: true,
+      },
+      { status: 200 }
+    );
+  } else {
+    return NextResponse.json(
+      {
+        result: "Internal error please try later",
+        success: false,
+      },
+      { status: 400 }
+    );
+  }
 }

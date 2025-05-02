@@ -22,7 +22,7 @@ import React from "react";
 const StudentDetail = ({ params }) => {
   const searchParams = useSearchParams();
   const studentName = searchParams.get("name");
-  console.log("studentName", searchParams);
+  // console.log("studentName", searchParams);
 
   return (
     <div>

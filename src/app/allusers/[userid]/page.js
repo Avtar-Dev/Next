@@ -18,6 +18,7 @@ const page = async ({ params }) => {
       <h2>User Details</h2>
       <h4>Name: {user.name}</h4>
       <h4>Email: {user.email}</h4>
+      <h4>Id: {user.id}</h4>
     </div>
   );
 };

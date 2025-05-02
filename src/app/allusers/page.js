@@ -1,3 +1,4 @@
+import DeleteUser from "@/util/DeleteUser";
 import Link from "next/link";
 
 async function getUsers() {
@@ -14,13 +15,16 @@ const AllUsers = async () => {
       <h1>All Users List</h1>
       {users.map((items) => (
         <div
-          className="flex gap-8 items-end justify-between w-30"
+          className="flex gap-8 items-end justify-between w-60"
           key={items.id}>
           <div className="">
             <Link href={`allusers/${items.id}`}>{items.name}</Link>
           </div>
-          <div className="">
-            <Link href={`allusers/${items.id}/update`}>Edit</Link>
+          <div className="flex gap-6">
+            <Link className="border" href={`allusers/${items.id}/update`}>
+              Edit
+            </Link>
+            <DeleteUser id={items.id} />
           </div>
         </div>
       ))}
