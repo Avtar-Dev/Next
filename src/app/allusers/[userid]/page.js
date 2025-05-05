@@ -9,8 +9,6 @@ async function getUsers(id) {
 const page = async ({ params }) => {
   const user = await getUsers(params.userid);
 
-  console.log("user", user);
-
   return user === "No Data Found" ? (
     <div>User not found</div>
   ) : (

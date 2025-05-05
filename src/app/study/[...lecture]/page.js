@@ -6,8 +6,6 @@ import React from "react";
 const Lectures = () => {
   const params = useParams();
 
-  console.log("Params:", params);
-
   return (
     <div>
       <h2>Lecture: {params.lecture[1]}</h2>

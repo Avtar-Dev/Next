@@ -36,7 +36,6 @@ const Page = () => {
       });
 
       const result = await response.json(); // This might be throwing
-      console.log("result", result);
 
       if (result.success) {
         alert("Information Updated");
