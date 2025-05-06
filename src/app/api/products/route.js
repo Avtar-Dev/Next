@@ -1,13 +1,16 @@
 import mongoose from "mongoose";
 import { connectionSrt } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { Product } from "@/lib/model/product";
 
 export async function GET() {
+  let data = [];
   try {
-    if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(connectionSrt);
-    }
-    return NextResponse.json({ result: true });
+    await mongoose.connect(connectionSrt);
+
+    const data = await Product.find();
+
+    return NextResponse.json({ result: data, success: true });
   } catch (error) {
     console.error("MongoDB connection error:", error);
     return NextResponse.json(
@@ -15,4 +18,16 @@ export async function GET() {
       { status: 500 }
     );
   }
+}
+
+export async function POST(request) {
+  // request has the data that we send from post api
+  await mongoose.connect(connectionSrt);
+  let payload = await request.json();
+  let product = new Product(payload);
+  const result = await product.save();
+  return NextResponse.json({
+    result,
+    success: true,
+  });
 }
