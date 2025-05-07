@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const getProducts = async () => {
@@ -12,7 +13,6 @@ const getProducts = async () => {
 
 const Page = async () => {
   const products = await getProducts();
-  console.log("products", products);
 
   return (
     <div className="p-4">
@@ -45,6 +45,13 @@ const Page = async () => {
                 </th>
                 <th className="border border-gray-400 px-4 py-2 font-medium">
                   {items?.category}
+                </th>
+                <th>
+                  <Link
+                    className="border border-gray-400 px-4 py-2 font-medium"
+                    href={`/products/${items._id}`}>
+                    Edit
+                  </Link>
                 </th>
               </tr>
             );

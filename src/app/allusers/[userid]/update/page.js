@@ -43,7 +43,7 @@ const Page = () => {
         alert("Please try with valid information");
       }
     } catch (error) {
-      alert("Failed to update user. Check console for details.");
+      alert("Failed to update user.");
     }
   };
 

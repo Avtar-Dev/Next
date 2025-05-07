@@ -16,6 +16,8 @@ export async function PUT(request, content) {
 
 export async function GET(request, content) {
   const productId = content.params.productid;
+  console.log("productId", productId);
+
   const record = { _id: productId };
 
   await mongoose.connect(connectionSrt);
