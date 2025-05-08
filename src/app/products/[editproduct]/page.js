@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Page = (props) => {
@@ -9,13 +10,14 @@ const Page = (props) => {
   const [company, setCompany] = useState("");
   const [category, setCategory] = useState("");
 
+  const router = useRouter();
+
   useEffect(() => {
     getProductDetail();
   }, []);
 
   const getProductDetail = async () => {
     let productId = props.params.editproduct;
-    console.log("productId", productId);
 
     let productData = await fetch(
       `http://localhost:3000/api/products/${productId}`
@@ -29,6 +31,20 @@ const Page = (props) => {
       setColor(result.color);
       setCompany(result.company);
       setCategory(result.category);
+    }
+  };
+
+  const updateProduct = async () => {
+    let productId = props.params.editproduct;
+
+    let data = await fetch("http://localhost:3000/api/products/" + productId, {
+      method: "PUT",
+      body: JSON.stringify({ name, price, color, category, company }),
+    });
+    data = await data.json();
+    if (data.result) {
+      alert("Product has been updated");
+      router.push("/products");
     }
   };
   return (
@@ -69,7 +85,9 @@ const Page = (props) => {
         placeholder="Enter Category"
         className="border w-50 p-1"
       />
-      <button className="border rounded-md p-1 bg-purple-400">
+      <button
+        className="border rounded-md p-1 bg-purple-400"
+        onClick={updateProduct}>
         Update Product
       </button>
       <Link href={"/products"}>Go to Product List</Link>

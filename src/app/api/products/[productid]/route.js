@@ -10,18 +10,21 @@ export async function PUT(request, content) {
   //   payload vich asi jo data update kr rhe aa post man to o aa reha hai
   await mongoose.connect(connectionSrt);
   const result = await Product.findOneAndUpdate(filter, payload);
-
   return NextResponse.json({ result, success: true });
 }
 
 export async function GET(request, content) {
   const productId = content.params.productid;
-  console.log("productId", productId);
-
   const record = { _id: productId };
-
   await mongoose.connect(connectionSrt);
   const result = await Product.findById(record);
+  return NextResponse.json({ result, success: true });
+}
 
+export async function DELETE(request, content) {
+  const productId = content.params.productid;
+  const record = { _id: productId };
+  await mongoose.connect(connectionSrt);
+  const result = await Product.deleteOne(record);
   return NextResponse.json({ result, success: true });
 }

@@ -1,8 +1,11 @@
+import DeleteProduct from "@/lib/DeleteProduct";
 import Link from "next/link";
 import React from "react";
 
 const getProducts = async () => {
-  let data = await fetch("http://localhost:3000/api/products");
+  let data = await fetch("http://localhost:3000/api/products", {
+    cache: "no-cache",
+  });
   data = await data.json();
   if (data.success) {
     return data.result;
@@ -52,6 +55,9 @@ const Page = async () => {
                     href={`/products/${items._id}`}>
                     Edit
                   </Link>
+                </th>
+                <th>
+                  <DeleteProduct id={items._id} />
                 </th>
               </tr>
             );
