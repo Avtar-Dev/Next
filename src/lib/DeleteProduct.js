@@ -17,7 +17,9 @@ const DeleteProduct = ({ id }) => {
   };
   return (
     <div className="border w-fit flex justify-center items-center">
-      <button onClick={deleteRecord}>Delete</button>
+      <button onClick={deleteRecord} className="cursor-pointer">
+        Delete
+      </button>
     </div>
   );
 };
